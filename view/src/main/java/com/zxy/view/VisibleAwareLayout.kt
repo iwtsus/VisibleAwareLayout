@@ -32,7 +32,7 @@ open class VisibleAwareLayout : FrameLayout {
     var visibleState: State = State.GONE
         private set
     private var windowIsVisible: Boolean = false
-    private var parentFragment: Fragment? = null;
+    private var parentFragment: Fragment? = null
     var tagName = ""
 
     //用于计算可见性判断的区域，默认为decorView
@@ -99,32 +99,28 @@ open class VisibleAwareLayout : FrameLayout {
             (drawingRect.bottom - drawingRect.top) * (drawingRect.right - drawingRect.left)
         val globalArea = (globalRect.bottom - globalRect.top) * (globalRect.right - globalRect.left)
         val areaShowAll = drawingArea == globalArea
-        if (BuildConfig.DEBUG) {
-            if (tagName.isNotEmpty()) {
-                Log.d(
-                    tagName,
-                    "container - $containerTop   $containerBottom   $containerLeft   $containerRight   "
-                )
-                Log.d(
-                    tagName,
-                    "globalRect - ${globalRect.top}   ${globalRect.bottom}   ${globalRect.left}   ${globalRect.right}   "
-                )
-                Log.d(
-                    tagName,
-                    "drawingRect - ${drawingRect.top}   ${drawingRect.bottom}   ${drawingRect.left}   ${drawingRect.right}   "
-                )
-                Log.d(tagName, "drawingArea $drawingArea    globalArea $globalArea")
-                Log.d(tagName, "globalRectAllVisible $globalRectAllVisible")
-                Log.d(tagName, "globalRectPartiallyVisible $globalRectPartiallyVisible")
-            }
+        if (tagName.isNotEmpty()) {
+            Log.d(
+                tagName,
+                "container - $containerTop   $containerBottom   $containerLeft   $containerRight   "
+            )
+            Log.d(
+                tagName,
+                "globalRect - ${globalRect.top}   ${globalRect.bottom}   ${globalRect.left}   ${globalRect.right}   "
+            )
+            Log.d(
+                tagName,
+                "drawingRect - ${drawingRect.top}   ${drawingRect.bottom}   ${drawingRect.left}   ${drawingRect.right}   "
+            )
+            Log.d(tagName, "drawingArea $drawingArea    globalArea $globalArea")
+            Log.d(tagName, "globalRectAllVisible $globalRectAllVisible")
+            Log.d(tagName, "globalRectPartiallyVisible $globalRectPartiallyVisible")
         }
         val showAll = globalRectAllVisible && areaShowAll
         val showRect = (!areaShowAll && globalRectAllVisible && globalRectPartiallyVisible)
-        if (BuildConfig.DEBUG) {
-            if (tagName.isNotEmpty()) {
-                Log.d(tagName, "showAll - $showAll")
-                Log.d(tagName, "showRect - $showRect")
-            }
+        if (tagName.isNotEmpty()) {
+            Log.d(tagName, "showAll - $showAll")
+            Log.d(tagName, "showRect - $showRect")
         }
         return if (showAll) {
             State.COMPLETELY_VISIBLE
